@@ -1,6 +1,7 @@
 <script>
   import { gql } from 'apollo-boost';
   import { getClient, query } from 'svelte-apollo';
+  import {debounce} from "lodash"
   import LocalEntitySummary, {fragment} from "./LocalEntitySummary.svelte"
 
   const QUERY = gql`
@@ -27,9 +28,11 @@
   $: localEntities = $localSearch.then(({data}) => {
     return data.localSearch.localResources.edges.map(({node}) => node.localEntity)
   })
+  // To prevent us overloading the backend, debounce the input
+  const updateLocation = debounce((e) => location = e.target.value, 300)
 </script>
 
-<input type="text" bind:value={location}>
+<input type="text" value={location} on:input={updateLocation}>
 
 {#await localEntities}
   <p>
