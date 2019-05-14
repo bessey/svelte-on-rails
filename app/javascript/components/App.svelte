@@ -2,11 +2,13 @@
   /* I'll affect things outside Svelte */
   :global(body) {
     font-family: "Helvetica Neue";
-    font-size: calc(14px + 0.5vw);
     background-color: ivory;
     color: darkslategray;
     padding: 0;
     margin: 0;
+  }
+  :global(body, input) {
+    font-size: calc(14px + 0.5vw);
   }
   :global(html) {
     padding: 0;

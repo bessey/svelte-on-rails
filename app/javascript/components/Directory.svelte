@@ -4,8 +4,8 @@
   import LocalEntitySummary, {fragment} from "./LocalEntitySummary.svelte"
 
   const QUERY = gql`
-    query {
-      localSearch(search: { location: "94110", resourceTypeId: "assisted-living" }) {
+    query SvelteDirectory($location: String!) {
+      localSearch(search: { location: $location, resourceTypeId: "assisted-living" }) {
         localResources {
           edges {
             node {
@@ -22,12 +22,16 @@
 
   const client = getClient();
 
-  const localSearch = query(client, { query: QUERY });
+  let location = "94110"
+  $: localSearch = query(client, { query: QUERY, variables: { location } });
 </script>
 
-<!-- 4. Use $books (note the "$"), to subscribe to query values -->
+<input type="text" bind:value={location}>
+
 {#await $localSearch}
-  Loading...
+  <p>
+    Loading...
+  </p>
 {:then result}
   {#each result.data.localSearch.localResources.edges as edge}
     <LocalEntitySummary localEntity={edge.node.localEntity}/>
