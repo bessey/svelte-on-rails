@@ -24,17 +24,20 @@
 
   let location = "94110"
   $: localSearch = query(client, { query: QUERY, variables: { location } });
+  $: localEntities = $localSearch.then(({data}) => {
+    return data.localSearch.localResources.edges.map(({node}) => node.localEntity)
+  })
 </script>
 
 <input type="text" bind:value={location}>
 
-{#await $localSearch}
+{#await localEntities}
   <p>
     Loading...
   </p>
-{:then result}
-  {#each result.data.localSearch.localResources.edges as edge}
-    <LocalEntitySummary localEntity={edge.node.localEntity}/>
+{:then localEntities}
+  {#each localEntities as localEntity}
+    <LocalEntitySummary localEntity={localEntity}/>
   {/each}
 {:catch error}
   Error: {error}
