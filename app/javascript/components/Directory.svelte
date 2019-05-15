@@ -1,7 +1,7 @@
 <script>
   import { gql } from 'apollo-boost';
   import { getClient, query } from 'svelte-apollo';
-  import {debounce} from "lodash"
+  import {debounce} from "lodash-es"
   import LocalEntitySummary, {fragment} from "./LocalEntitySummary.svelte"
   import { fade } from 'svelte/transition';
 
