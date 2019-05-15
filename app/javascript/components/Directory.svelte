@@ -8,7 +8,7 @@
   const QUERY = gql`
     query SvelteDirectory($location: String!) {
       localSearch(search: { location: $location, resourceTypeId: "assisted-living" }) {
-        localResources {
+        localResources(first: 10) {
           edges {
             node {
               localEntity {
