@@ -7,6 +7,7 @@ environment.loaders.append('svelte', {
     loader: 'svelte-loader',
     options: {
       emitCss: true,
+      hydratable: true,
     },
   },
 })
