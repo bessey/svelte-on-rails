@@ -3,7 +3,7 @@
   import { getClient, query } from 'svelte-apollo';
   import {debounce} from "lodash"
   import LocalEntitySummary, {fragment} from "./LocalEntitySummary.svelte"
-	import { fade } from 'svelte/transition';
+  import { fade } from 'svelte/transition';
 
   const QUERY = gql`
     query SvelteDirectory($location: String!) {
