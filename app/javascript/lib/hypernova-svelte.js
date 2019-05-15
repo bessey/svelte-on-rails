@@ -5,6 +5,7 @@ const { serialize, load } = hypernova
 export const renderSvelte = (name, Component) => hypernova({
   server() {
     return (props) => {
+      console.log("I TRIED")
       const contents = Component.render(props);
       return serialize(name, contents, props);
     };
